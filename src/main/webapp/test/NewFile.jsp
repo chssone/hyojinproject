@@ -7,6 +7,6 @@
 <title>커밋 테스트</title>
 </head>
 <body>
-테스트 내용입니다.
+수정 내용입니다.
 </body>
 </html>
