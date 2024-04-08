@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>커밋 테스트</title>
 </head>
 <body>
-
+테스트 내용입니다.
 </body>
 </html>
