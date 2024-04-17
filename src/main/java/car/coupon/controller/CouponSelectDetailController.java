@@ -1,0 +1,34 @@
+package car.coupon.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import car.coupon.control.CouponController;
+import car.coupon.dao.CouponDAO;
+import car.coupon.dto.CouponDTO;
+import car.coupon.handler.CouponHandlerAdapter;
+
+public class CouponSelectDetailController implements CouponController{
+	private static Log log = LogFactory.getLog(CouponSelectDetailController.class);
+	@Override
+	public CouponHandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
+		int coupon_code = Integer.parseInt(request.getParameter("coupon_code"));
+		log.info(coupon_code);
+		CouponDAO couponDao = new CouponDAO();
+		CouponDTO couponDTO = new CouponDTO();
+		
+		couponDTO = couponDao.couponSelect(coupon_code);
+		log.info(couponDTO);
+		
+		request.setAttribute("couponDTO", couponDTO);
+		CouponHandlerAdapter couponHandlerAdapter = new CouponHandlerAdapter();
+		log.info("상세 쿠폰 조회");
+		
+		couponHandlerAdapter.setPath("/WEB-INF/coupon/coupon_select_detail_view.jsp");
+		log.info("detail_view 값 넘어가는지");
+		return couponHandlerAdapter;
+	}
+}
