@@ -8,17 +8,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import car.coupon.control.CouponController;
 import car.coupon.dao.CouponDAO;
 import car.coupon.dto.CouponDTO;
-import car.coupon.handler.CouponHandlerAdapter;
+import car.servlet.control.Controller;
+import car.servlet.handler.HandlerAdapter;
 
-public class CouponInsertController implements CouponController{
+public class CouponInsertController implements Controller{
 	private static Log log = LogFactory.getLog(CouponInsertController.class);
 	@Override
-	public CouponHandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
+	public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		int coupon_code = Integer.parseInt(request.getParameter("coupon_code"));
 		String coupon_type = request.getParameter("coupon_type");
 		String coupon_name = request.getParameter("coupon_name");
 		int coupon_price = Integer.parseInt(request.getParameter("coupon_price"));
@@ -32,7 +31,6 @@ public class CouponInsertController implements CouponController{
 		log.info("얼레이리스트 - " + arrayList);
 		request.setAttribute("arrayList", arrayList);
 		
-		couponDTO.setCoupon_code(coupon_code);
 		couponDTO.setCoupon_type(coupon_type);
 		couponDTO.setCoupon_name(coupon_name);
 		couponDTO.setCoupon_price(coupon_price);
@@ -42,10 +40,10 @@ public class CouponInsertController implements CouponController{
 		log.info("디티오 - " + couponDTO);
 		request.setAttribute("couponDTO", couponDTO);
 		log.info("쿠폰 정보 등록");
-		CouponHandlerAdapter couponHandlerAdapter = new CouponHandlerAdapter();
+		HandlerAdapter HandlerAdapter = new HandlerAdapter();
 		
-		couponHandlerAdapter.setPath("WEB-INF/coupon/coupon_insert_view.jsp");
+		HandlerAdapter.setPath("WEB-INF/view/coupon/coupon_insert_view.jsp");
 		
-		return couponHandlerAdapter;
+		return HandlerAdapter;
 	}
 }

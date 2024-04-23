@@ -113,13 +113,12 @@ public class PaymentDAO implements PaymentService{
 			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc");
 			connection = dataSource.getConnection( );
 			String sql = "insert into payment (payment_code, payment_card_num, payment_card_company, payment_total, payment_date ) ";
-			sql += "values ( ? , ? , ? , ? , SYSDATE) ";
+			sql += "values ( payment_code_seq.NEXTVAL , ? , ? , ? , SYSDATE) ";
 			log.info("SQL 확인 - " + sql);
 			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, paymentDTO.getPayment_code());
-			preparedStatement.setString(2, paymentDTO.getPayment_card_num());
-			preparedStatement.setString(3, paymentDTO.getPayment_card_company());
-			preparedStatement.setInt(4, paymentDTO.getPayment_total());
+			preparedStatement.setString(1, paymentDTO.getPayment_card_num());
+			preparedStatement.setString(2, paymentDTO.getPayment_card_company());
+			preparedStatement.setInt(3, paymentDTO.getPayment_total());
 			
 			int count = preparedStatement.executeUpdate();
 			if (count > 0) {

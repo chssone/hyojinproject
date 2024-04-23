@@ -6,16 +6,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import car.coupon.control.CouponController;
 import car.coupon.dao.CouponDAO;
 import car.coupon.dto.CouponDTO;
-import car.coupon.handler.CouponHandlerAdapter;
+import car.servlet.control.Controller;
+import car.servlet.handler.HandlerAdapter;
 
-public class CouponUpdateViewController implements CouponController{
+public class CouponUpdateViewController implements Controller{
 	private static Log log = LogFactory.getLog(CouponUpdateViewController.class);
 
 	@Override
-	public CouponHandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
+	public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
 		int coupon_code = Integer.parseInt(request.getParameter("coupon_code"));
 		log.info(coupon_code);
 		String coupon_type = request.getParameter("coupon_type");
@@ -38,9 +38,9 @@ public class CouponUpdateViewController implements CouponController{
 		couponDTO = couponDao.couponUpdate(couponDTO);
 		log.info("업데이트뷰 디티오 -" + couponDTO);
 		request.setAttribute("couponDTO", couponDTO);
-		CouponHandlerAdapter couponHandlerAdapter = new CouponHandlerAdapter();
+		HandlerAdapter HandlerAdapter = new HandlerAdapter();
 		
-		couponHandlerAdapter.setPath("/WEB-INF/coupon/coupon_update_view.jsp");
-		return couponHandlerAdapter;
+		HandlerAdapter.setPath("/WEB-INF/view/coupon/coupon_update_view.jsp");
+		return HandlerAdapter;
 	}
 }

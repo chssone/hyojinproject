@@ -117,14 +117,13 @@ public class CouponDAO implements CouponService{
 			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc");
 			connection = dataSource.getConnection( );
 			String sql = "insert into coupon (coupon_code, coupon_type, coupon_name, coupon_price, coupon_start, coupon_end, coupon_use ) ";
-			sql += " values ( ? , ? , ? , ? , sysdate , sysdate+30, ? ) ";
+			sql += " values ( payment_code_seq.NEXTVAL , ? , ? , ? , sysdate , sysdate+30, ? ) ";
 			log.info("SQL 확인 - " + sql);
 			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1,  couponDTO.getCoupon_code());
-			preparedStatement.setString(2,  couponDTO.getCoupon_type());
-			preparedStatement.setString(3,  couponDTO.getCoupon_name());
-			preparedStatement.setInt(4,  couponDTO.getCoupon_price());
-			preparedStatement.setString(5,  couponDTO.getCoupon_use());
+			preparedStatement.setString(1,  couponDTO.getCoupon_type());
+			preparedStatement.setString(2,  couponDTO.getCoupon_name());
+			preparedStatement.setInt(3,  couponDTO.getCoupon_price());
+			preparedStatement.setString(4,  couponDTO.getCoupon_use());
 			
 			int count = preparedStatement.executeUpdate( );
 			if(count > 0) { connection.commit( );

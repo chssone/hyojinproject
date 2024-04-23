@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import car.payment.control.Controller;
 import car.payment.controller.PaymentDeleteController;
 import car.payment.controller.PaymentInsertController;
 import car.payment.controller.PaymentSelectController;
 import car.payment.controller.PaymentSelectDetailController;
 import car.payment.controller.PaymentUpdateController;
 import car.payment.controller.PaymentUpdateViewController;
-import car.payment.handler.PaymentHandlerAdapter;
+import car.servlet.control.Controller;
+import car.servlet.handler.HandlerAdapter;
 
 @WebServlet("/PaymentDispatcherServlet")
 public class PaymentDispatcherServlet extends HttpServlet {
@@ -43,7 +43,7 @@ public class PaymentDispatcherServlet extends HttpServlet {
 		String pathURL = requestURI.substring(contextPath.length());
 		log.info("매핑명 조회 - " + pathURL);
 		
-		PaymentHandlerAdapter paymentHandlerAdapter = null;
+		HandlerAdapter paymentHandlerAdapter = null;
 		
 		Controller controller = null;
 		
@@ -64,8 +64,8 @@ public class PaymentDispatcherServlet extends HttpServlet {
 		
 		else if (pathURL.equals("/PaymentInsertView.jn")) {
 			
-			paymentHandlerAdapter = new PaymentHandlerAdapter();			
-			paymentHandlerAdapter.setPath("/WEB-INF/payment/payment_insert.jsp");
+			paymentHandlerAdapter = new HandlerAdapter();			
+			paymentHandlerAdapter.setPath("/WEB-INF/view/payment/payment_insert.jsp");
 			log.info("결제 등록 화면 뷰 확인 - " + paymentHandlerAdapter);
 		}
 		
@@ -90,9 +90,9 @@ public class PaymentDispatcherServlet extends HttpServlet {
 		
 		else if(pathURL.equals("/PaymentDeleteView.jn")) {
 		
-			paymentHandlerAdapter = new PaymentHandlerAdapter( );
+			paymentHandlerAdapter = new HandlerAdapter( );
 		
-			paymentHandlerAdapter.setPath("/WEB-INF/payment/payment_delete.jsp");
+			paymentHandlerAdapter.setPath("/WEB-INF/view/payment/payment_delete.jsp");
 			log.info("결제 삭제 화면 뷰 확인 - " + paymentHandlerAdapter);
 			}
 

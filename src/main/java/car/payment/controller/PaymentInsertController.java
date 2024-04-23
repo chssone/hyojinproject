@@ -8,16 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import car.payment.control.Controller;
 import car.payment.dao.PaymentDAO;
 import car.payment.dto.PaymentDTO;
-import car.payment.handler.PaymentHandlerAdapter;
+import car.servlet.control.Controller;
+import car.servlet.handler.HandlerAdapter;
 
 public class PaymentInsertController implements Controller {
 	private static Log log = LogFactory.getLog(PaymentInsertController.class);
 	@Override
-	public PaymentHandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
-		int payment_code = Integer.parseInt(request.getParameter("payment_code"));
+	public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		String payment_card_num = request.getParameter("payment_card_num");
 		
@@ -33,7 +32,6 @@ public class PaymentInsertController implements Controller {
 		log.info("얼레이리스트 - " + arrayList);
 		request.setAttribute("arrayList", arrayList);
 		
-		paymentDTO.setPayment_code(payment_code);
 		paymentDTO.setPayment_card_num(payment_card_num);
 		paymentDTO.setPayment_card_company(payment_card_company);
 		paymentDTO.setPayment_total(payment_total);
@@ -42,9 +40,9 @@ public class PaymentInsertController implements Controller {
 		log.info("디티오 - " + paymentDTO);
 		request.setAttribute("paymentDTO", paymentDTO);
 		log.info("결제 정보 등록");
-		PaymentHandlerAdapter paymentHandlerAdapter = new PaymentHandlerAdapter();
+		HandlerAdapter paymentHandlerAdapter = new HandlerAdapter();
 		
-		paymentHandlerAdapter.setPath("/WEB-INF/payment/payment_insert_view.jsp");
+		paymentHandlerAdapter.setPath("/WEB-INF/view/payment/payment_insert_view.jsp");
 		
 		return paymentHandlerAdapter;
 	}

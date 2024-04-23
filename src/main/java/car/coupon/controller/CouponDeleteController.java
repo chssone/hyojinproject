@@ -6,15 +6,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import car.coupon.control.CouponController;
 import car.coupon.dao.CouponDAO;
 import car.coupon.dto.CouponDTO;
-import car.coupon.handler.CouponHandlerAdapter;
+import car.servlet.control.Controller;
+import car.servlet.handler.HandlerAdapter;
 
-public class CouponDeleteController implements CouponController{
+public class CouponDeleteController implements Controller{
 	private static Log log = LogFactory.getLog(CouponDeleteController.class);
 	@Override
-	public CouponHandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
+	public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
 		int coupon_code = Integer.parseInt(request.getParameter("coupon_code"));
 		log.info(coupon_code);
 		CouponDAO couponDao = new CouponDAO( );
@@ -26,9 +26,9 @@ public class CouponDeleteController implements CouponController{
 		
 		couponDTO = couponDao.couponDelete(coupon_code);
 		log.info(couponDTO);
-		CouponHandlerAdapter couponHandlerAdapter = new CouponHandlerAdapter();
+		HandlerAdapter HandlerAdapter = new HandlerAdapter();
 		
-		couponHandlerAdapter.setPath("/WEB-INF/coupon/coupon_delete_view.jsp");
-		return couponHandlerAdapter;
+		HandlerAdapter.setPath("/WEB-INF/view/coupon/coupon_delete_view.jsp");
+		return HandlerAdapter;
 	}
 }

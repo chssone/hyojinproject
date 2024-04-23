@@ -8,15 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import car.payment.control.Controller;
 import car.payment.dao.PaymentDAO;
 import car.payment.dto.PaymentDTO;
-import car.payment.handler.PaymentHandlerAdapter;
+import car.servlet.control.Controller;
+import car.servlet.handler.HandlerAdapter;
 
 public class PaymentSelectController implements Controller {
 	private static Log log = LogFactory.getLog(PaymentSelectController.class);
 	@Override
-	public PaymentHandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
+	public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
 		PaymentDAO paymentDao = new PaymentDAO();
 		PaymentDTO paymentDTO = new PaymentDTO();
 		log.info(paymentDTO);
@@ -24,9 +24,9 @@ public class PaymentSelectController implements Controller {
 		
 		arrayList = paymentDao.paymentSelectAll();
 		request.setAttribute("arrayList", arrayList);
-		PaymentHandlerAdapter paymentHandlerAdapter = new PaymentHandlerAdapter();
+		HandlerAdapter paymentHandlerAdapter = new HandlerAdapter();
 		
-		paymentHandlerAdapter.setPath("WEB-INF/payment/payment_select_view.jsp");
+		paymentHandlerAdapter.setPath("WEB-INF/view/payment/payment_select_view.jsp");
 		return paymentHandlerAdapter;
 	}
 }
